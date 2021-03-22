@@ -1,13 +1,58 @@
 package exercicio12;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.Date;
+
 public class FrequenciaCardiaca {
-	public String nome, sobrenome, dataNascimento;
+	public String nome, sobrenome;
+	public Date dataNascimento;
+	private ZoneId ZONEID = ZoneId.of("America/Sao_Paulo");
+	//public LocalDate dataAtual = new Date();
 	
-	public FrequenciaCardiaca(String nome, String sobrenome, String dataNascimento) {
+	/*public FrequenciaCardiaca(String nome, String sobrenome, Date dataNascimento) {
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.dataNascimento = dataNascimento;
+	}*/
+
+	public String getNome() {
+		return nome;
 	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getSobrenome() {
+		return sobrenome;
+	}
+
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
+	}
+
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public static void setDataNascimento(Date dataNascimento) {
+		dataNascimento = dataNascimento;
+	}
+	
+	public int getIdade() {
+		int idade = 0;
+		LocalDate dataHoje = LocalDate.now();
+		if(this.dataNascimento != null) {
+			LocalDate dtNascimento = ZonedDateTime.ofInstant(dataNascimento.toInstant(), ZONEID).toLocalDate();
+			Period dif = dtNascimento.until(dataHoje);
+			idade = dif.getYears();
+		}
+		return idade;
+	}
+	
 	
 	
 
