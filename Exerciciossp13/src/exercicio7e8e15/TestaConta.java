@@ -1,4 +1,4 @@
-package execicio7e8e15;
+package exercicio7e8e15;
 
 public class TestaConta {
 	public static void main(String[] args) {
