@@ -1,11 +1,27 @@
-package execicio7e8;
+package execicio7e8e15;
 
 public class TestaConta {
 	public static void main(String[] args) {
-		ContaBancaria conta = new ContaBancaria("Brayan", 123456, 1, 100.01, 100.00, "17/03/2021");
+		Conta conta1 = new Conta("Brayan", 123456, 1, 100.01, 100.00, "17/03/2021");
 		
-		conta.recuperaDadosParaImpressao();
-				
+		conta1.recuperaDadosParaImpressao();
+		
+		Conta conta2 = new Conta("Priscila", 123456, 1, 100.01, 100.00, "17/03/2021");
+		
+		
+		
+		conta1.recuperaDadosParaImpressao();
+		
+		conta2.recuperaDadosParaImpressao();
+		
+		
+		
+		
+		
+		
+		
+		
+		/*		
 		conta.imprimirDados();
 		
 		conta.sacar(101);
@@ -35,6 +51,7 @@ public class TestaConta {
 		conta.sacar(130);
 		
 		conta.imprimirDados();
+		*/
 	}
 
 }
