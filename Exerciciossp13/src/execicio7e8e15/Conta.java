@@ -1,17 +1,19 @@
-package execicio7e8;
+package execicio7e8e15;
 
-public class ContaBancaria {
+public class Conta {
+	private static int totalDeContas;
 	private String nomeDoTitular, dataDeAbertura;
 	private int numero, agencia;
 	private double saldo, limite;
-		
-	public ContaBancaria(String nomeDoTitular, int numero, int agencia, double saldo, double limite, String dataDeAbertura) {
+	
+	public Conta(String nomeDoTitular, int numero, int agencia, double saldo, double limite, String dataDeAbertura) {
 		this.nomeDoTitular = nomeDoTitular;
 		this.numero = numero;
 		this.agencia = agencia;
 		this.saldo = saldo;
 		this.limite = limite;
 		this.dataDeAbertura = dataDeAbertura;
+		Conta.totalDeContas++;
 	}
 	
 
@@ -57,6 +59,10 @@ public class ContaBancaria {
 	public double getSaldoComLimite() {
 		return this.limite + this.saldo;
 	}
+	
+	public static int getTotalDeContas() {
+		return Conta.totalDeContas;
+	}
 
 	public void imprimirDados() {
 		System.out.printf("Saldo: R$%.2f Limite de saque: R$%.2f. %n",
@@ -64,8 +70,8 @@ public class ContaBancaria {
 	}
 
 	public void recuperaDadosParaImpressao() {
-		System.out.printf("%nTitular da conta:  %s %nNúmero da conta: %d-%d%nSaldo: R$%.2f%nCheque especial: R$%.2f %nData de abertura: %s %n%n",
-				this.nomeDoTitular, this.numero, this.agencia, this.getSaldo(), this.getLimite(), this.dataDeAbertura);
+		System.out.printf("%nTitular da conta:  %s %nNúmero da conta: %d-%d%nSaldo: R$%.2f%nCheque especial: R$%.2f %nData de abertura: %s %nTotanl de Contas: %d %n%n",
+				this.nomeDoTitular, this.numero, this.agencia, this.getSaldo(), this.getLimite(), this.dataDeAbertura, Conta.totalDeContas);
 	}
 
 }
