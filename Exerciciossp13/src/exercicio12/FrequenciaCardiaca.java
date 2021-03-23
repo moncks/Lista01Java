@@ -1,5 +1,8 @@
 package exercicio12;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
@@ -7,16 +10,28 @@ import java.time.ZonedDateTime;
 import java.util.Date;
 
 public class FrequenciaCardiaca {
-	public String nome, sobrenome;
-	public Date dataNascimento;
-	private ZoneId ZONEID = ZoneId.of("America/Sao_Paulo");
-	//public LocalDate dataAtual = new Date();
+	private String nome, sobrenome, dataNascimento;
+	private int idade;
+	private double frequencia;
 	
-	/*public FrequenciaCardiaca(String nome, String sobrenome, Date dataNascimento) {
+	
+	
+	
+	public FrequenciaCardiaca(String nome, String sobrenome, String dataNascimento) {
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.dataNascimento = dataNascimento;
-	}*/
+	}
+	
+	public static Date StringToDate(String dataNascimento) throws ParseException {
+		// Instantiating the SimpleDateFormat class
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+		// Parsing the given String to Date object
+		Date date = formatter.parse(dataNascimento);
+		System.out.println("Date object value: " + date);
+		return date;
+	}
 
 	public String getNome() {
 		return nome;
@@ -34,23 +49,51 @@ public class FrequenciaCardiaca {
 		this.sobrenome = sobrenome;
 	}
 
-	public Date getDataNascimento() {
+	public String getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public static void setDataNascimento(Date dataNascimento) {
-		dataNascimento = dataNascimento;
+	public void setDataNascimento(String dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 	
-	public int getIdade() {
-		int idade = 0;
-		LocalDate dataHoje = LocalDate.now();
-		if(this.dataNascimento != null) {
-			LocalDate dtNascimento = ZonedDateTime.ofInstant(dataNascimento.toInstant(), ZONEID).toLocalDate();
-			Period dif = dtNascimento.until(dataHoje);
-			idade = dif.getYears();
-		}
-		return idade;
+	public int getIdade() throws ParseException {
+		// Converting String to Date
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = formatter.parse(this.getDataNascimento());
+
+		// Converting obtained Date object to LocalDate object
+		Instant instant = date.toInstant();
+		ZonedDateTime zone = instant.atZone(ZoneId.systemDefault());
+		LocalDate givenDate = zone.toLocalDate();
+
+		// Calculating the difference between given date to current date.
+		Period period = Period.between(givenDate, LocalDate.now());
+		// System.out.print("Olá " + name + " Sua idade é: ");
+		period.getYears();
+
+		return idade = period.getYears();
+	}
+	
+	public double getFrequenciaMaxima() {
+		frequencia = 220 - idade;
+		return frequencia;
+	}
+
+	public double getFrequenciaAlvoInferior() {
+		return frequencia * 0.5;
+	}
+
+	public double getFrequenciaAlvoSuperior() {
+		return frequencia * 0.85;
+	}
+
+	public void imprimir() throws ParseException {
+		System.out.printf(
+				"%nNome: %s %s %nData de Nascimento: %s %nIdade: %d "
+						+ "%nFrequência cardiaca maxíma: %.0fbpm %nFrequência cardiáca alvo deve estar entre: %.0fbmp e %.0fbpm%n",
+				this.getNome(), this.getSobrenome(), this.getDataNascimento(), this.getIdade(),
+				this.getFrequenciaMaxima(), this.getFrequenciaAlvoInferior(),this.getFrequenciaAlvoSuperior());
 	}
 	
 	
