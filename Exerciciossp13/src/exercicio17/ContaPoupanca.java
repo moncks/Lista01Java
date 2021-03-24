@@ -1,11 +1,12 @@
 package exercicio17;
 
 public class ContaPoupanca {
-	private static double taxaDeJurosAnual = 10;
+	private static double taxaDeJurosAnual;
 	private double saldo, jurosMensal;
 	
-	public ContaPoupanca(double saldo) {
+	public ContaPoupanca(double saldo, double taxaDeJurosAnual) {
 		this.saldo = saldo;
+		ContaPoupanca.taxaDeJurosAnual = taxaDeJurosAnual;
 		
 	}
 
@@ -14,7 +15,7 @@ public class ContaPoupanca {
 		return taxaDeJurosAnual;
 	}
 
-	public static void setTaxaDeJurosAnual(double taxaDeJurosAnual) {
+	public void setTaxaDeJurosAnual(double taxaDeJurosAnual) {
 		ContaPoupanca.taxaDeJurosAnual = taxaDeJurosAnual;
 	}
 
@@ -26,10 +27,13 @@ public class ContaPoupanca {
 		this.saldo = saldo;
 	}
 	
-	public void calcularJurosMensal(double jurosMensal) {
-		;
+	public double calcularJurosMensal() {
+		return jurosMensal = saldo * taxaDeJurosAnual / 12;
 	}
 	
+	public double getSaldoAtualizado() {
+		return saldo + jurosMensal;
+	}
 	public double getJurosMensal() {
 		jurosMensal = (saldo * taxaDeJurosAnual)/12;
 		return jurosMensal;
@@ -40,7 +44,7 @@ public class ContaPoupanca {
 	}
 	
 	public void imprimir() {
-		System.out.printf("%nSaldo: R$%.2f %nJuros Anual: %.2f %nJuros Mensal: %.2f", this.getSaldo(), this.getTaxaDeJurosAnual(), this.getJurosMensal());
+		System.out.printf("%nSaldo: R$%.2f %nJuros Anual: %.2f %nJuros Mensal: %.2f %nSaldo Atualizado: R$%.2f %n", this.getSaldo(), this.getTaxaDeJurosAnual(), this.getJurosMensal(), this.getSaldoAtualizado());
 	}
 
 }
